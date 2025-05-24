@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+    <div class="row">
+                        <div class="col-lg-6">
+                        {% for news in posts %}
+                            <div class="d-flex mb-3">
+                                <img src="{{news.image.url}}" style="width: 100px; height: 100px; object-fit: cover;">
+                                <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                    <div class="mb-1" style="font-size: 13px;">
+                                        <a href="">{{news.category}}</a>
+                                        <span class="px-1">/</span>
+                                        <span>{{news.published_at}}</span>
+                                    </div>
+                                    <a class="h6 m-0" href="{{news.link}}">{{news.title}}</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+{% endblock %}

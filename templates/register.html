@@ -7,7 +7,7 @@
                 <div class="col-md-7">
                     <div class="contact-form bg-light mb-3" style="padding: 30px;">
                         <div id="success"></div>
-                        <form method="post" name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <form method="post" name="sentMessage" action="{% url 'newsroom:register' %}" novalidate="novalidate">
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="col-md-6">

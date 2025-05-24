@@ -1,9 +1,11 @@
+from django.contrib.auth import authenticate, logout, login
 from django.shortcuts import render
 from flask import redirect
-from django.contrib.auth import authenticate, logout, login
-from .models import AllNews, MainNews, Categories, Featured, Business, Technology, Entertainment, Sports, Latest, Comment, GetİnTouch, Single_news
+from django.db.models import Q
 from .forms import CommentForm, ContactForm, UserCreation, LoginForm
-
+from .models import AllNews, MainNews, Categories, Featured, Business, Technology, Entertainment, Sports, Latest, \
+    Comment, GetİnTouch, Single_news
+from django.utils.translation import gettext as _, get_language
 
 def home(request):
     all_news = AllNews.objects.all()
@@ -92,10 +94,12 @@ def register(request):
             return redirect('newsroom:login')
         else:
             print(register_form.errors)
+            return render(request, 'register.html', {'register_form': register_form})
 
     else:
         register_form = UserCreation()
     return render(request, 'register.html', {'register_form': register_form})
+
 
 def login_view(request):
     login_form = LoginForm()
@@ -115,4 +119,12 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return  redirect('newsroom:home')
+
+def search_article(request):
+    data = {}
+    key_data = request.GET.get('key')
+    if key_data:
+        posts = Technology.objects.filter(Q(title__icontains=key_data.capitalize()) | Q(content__icontains=key_data.lower()) | Q(category__icontains=key_data.capitalize()), is_featured=False)
+        data['posts'] = posts
+    return render(request, 'search_results.html', data)
 # Create your views here.

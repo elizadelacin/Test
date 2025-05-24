@@ -80,13 +80,25 @@
                     <a href="{% url 'newsroom:login' %}" class="nav-item nav-link {% if request.path == '/login/'%} active {% endif %}"><b>Login</b></a>
                     {% endif %}
                 </div>
-                <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
-                    <input type="text" class="form-control" placeholder="Keyword">
-                    <div class="input-group-append">
-                        <button class="input-group-text text-secondary"><i
-                                class="fa fa-search"></i></button>
+                <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <select name="language">
+                        <option value="az">Azərbaycanca</option>
+                        <option value="en">English</option>
+                    </select>
+                    <button type="submit">Dəyiş</button>
+                </form>
+
+                <form method="GET" action="{% url 'newsroom:search' %}">
+                    <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
+                        <input type="text" name="key" class="form-control" placeholder="Keyword">
+                        <div class="input-group-append">
+                            <button type="submit" class="input-group-text text-secondary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </nav>
     </div>
