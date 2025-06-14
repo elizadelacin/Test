@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-yh(k67l-bpp&!12wkihe!$9r9c7(g(b=%sc)x=4h^9-(^#c%&o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["13.51.121.199"]
+ALLOWED_HOSTS = ["*"]
 
 print(os.getenv('DB_NAME'))
 
